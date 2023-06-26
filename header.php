@@ -33,14 +33,14 @@ session_start();
   </script>
 
   <?php
-  if (!isset($_SESSION['role'])) {
+  if (!isset($_SESSION['permissions'])) {
     echo '
     <a href="login.php">
     <button type="button" class="home-button button" class="login-button">Login</button></a>
     ';
   }
 
-  if (isset($_SESSION['role'])) {
+  if (isset($_SESSION['permissions'])) {
     echo '
     <a href="logout.php">
     <button type="button" class="home-button button" class="login-button">Log out</button></a>

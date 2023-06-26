@@ -8,15 +8,15 @@ $createAccountStatus = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $user_name = $_POST['user_name'];
+    $user_name = $_POST['email'];
     $password = $_POST['password'];
-    $displayname = $_POST['displayname'];
+    $displayname = $_POST['first_name'];
 
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
 
         $createAccountStatus = "Account Created Successfully";
 
-        $query = "insert into users (username, password, displayname, role) values ('$user_name', '$password', '$displayname','instructor')";
+        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', '$password', '$displayname','instructor')";
 
         mysqli_query($con, $query);
 
@@ -105,9 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <form method="POST">
                 <div style="font-size: 20px; margin: 10px; color:#F7B733;">Create Account</div>
-                <input id="text" type="text" name="user_name" placeholder="Username"><br><br>
+                <input id="text" type="text" name="email" placeholder="Email"><br><br>
                 <input id="text" type="password" name="password" placeholder="Password"><br><br>
-                <input id="text" type="text" name="displayname" placeholder="Display name"><br><br>
+                <input id="text" type="text" name="first_name" placeholder="First Name"><br><br>
 
                 <input id="button" type="submit" value="SIGN UP"><br><br>
 

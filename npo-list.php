@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="background-color: #1c1c1c">
-
 <head>
-
+  <meta charset="utf-8">
   <link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,121 +12,94 @@
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
   <title>Machine Learning Portal</title>
-  <style>
-    .dataTables_length select {
-      background-color: white !important;
-    }
-
-    .dataTables_filter input {
-      background-color: white !important;
-      color: black;
-    }
-
-    .dataTables_wrapper .dataTables_length,
-    .dataTables_wrapper .dataTables_filter {
-      color: white;
-    }
-
-    .crud_button {
-      font: bold 11px Arial;
-      text-decoration: none;
-      background-color: #EEEEEE;
-      color: #333333;
-      padding: 2px 6px 2px 6px;
-      border-top: 1px solid #CCCCCC;
-      border-right: 1px solid #333333;
-      border-bottom: 1px solid #333333;
-      border-left: 1px solid #CCCCCC;
-      margin: 10px;
-    }
-
-    .crud_button :hover {
-      color: #bdbdbd;
-    }
-  </style>
 </head>
-
 <?php include "header.php" ?>
-
-<h1 style="text-align: center;">List of Resources</h1>
-
+<h1 style="text-align: center;">List of Non-Profit Organizations</h1>
 <?php
-if (isset($_SESSION['role'])) {
-  echo ' <div class="resource-buttons">
-
-  <a href="add-resource.php">
-      <button type="button" class="general-button">Add Resource</button></a>
-</div>
-
-<h1> Hello ' . $_SESSION["displayname"] . ' </h1>';
+if (isset($_SESSION['permissions'])) {
+  echo '<div class="resource-buttons">
+          <a href="add-npo.php">
+            <button type="button" class="general-button">Add Organization</button>
+          </a>
+        </div>
+        <h1> Hello ' . $_SESSION["user_id"] . ' </h1>';
 }
-
 ?>
-
-<table id="resourceTable" class="display" width="100%" cellspacing="0">
+<table id="npoTable" class="display" width="100%" cellspacing="0">
   <thead>
     <tr>
       <th style="color: white;">id</th>
-      <th style="color: white;">topic</th>
-      <th style="color: white;">description</th>
+      <th style="color: white;">name</th>
       <th style="color: white;">type</th>
-      <th style="color: white;">keywords</th>
-      <th style="color: white;"></th>
+      <th style="color: white;">description</th>
+      <th style="color: white;">address</th>
+      <th style="color: white;">city</th>
+      <th style="color: white;">state</th>
+      <th style="color: white;">email</th>
+      <th style="color: white;">phone</th>
+      <th style="color: white;">website</th>
+      <th style="color: white;">Actions</th> <!-- New column for Modify/Delete buttons -->
     </tr>
   </thead>
 </table>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#resourceTable').dataTable({
+    $('#npoTable').dataTable({
       "processing": true,
       "pageLength": 50,
       "ajax": "fetch_data.php",
-      "columns": [{
-          data: 'id'
-        },
+      "columns": [
+        { "data": "id", "searchable": true },
+        { "data": "name", "searchable": true },
+        { "data": "type", "searchable": true },
+        { "data": "description", "searchable": true },
+        { "data": "address", "searchable": true },
+        { "data": "city", "searchable": true },
+        { "data": "state", "searchable": true },
+        { "data": "email", "searchable": true },
+        { "data": "phone", "searchable": true },
+        { "data": "website", "searchable": true },
         {
-          data: null,
-          "render": function(o) {
-            var id = o.id;
-            var topic = o.topic;
+          "data": null,
+          "render": function(data, type, row) {
+            var id = data.id;
             var htmlString = `
-                            <a href=view-resources.php?id=` + id + `>` + topic + `</a>
-                            `;
-            return htmlString;
-          }
-        },
-        {
-          data: 'description'
-        },
-        {
-          data: 'type'
-        },
-        {
-          data: 'keywords'
-        },
-        {
-          data: null,
-          "render": function(o) {
-            var id = o.id;
-            var resource_creator = o.instructor_id;
-            var user_id = '<?php if (isset($_SESSION['user_id'])) echo $_SESSION['user_id']; ?>';
-            var user_role = '<?php if (isset($_SESSION['role'])) echo $_SESSION['role']; ?>';
-            var htmlString = '';
-            if (user_role == 'admin' || user_id == resource_creator) {
-              htmlString = `
-                              <span>
-                                  <a class= "crud_button" href=view-resources.php?id=` + id + `> Display </a>
-                                  <a class= "crud_button" href=modify-resource.php?id=` + id + `> Modify </a>
-                                  <a class= "crud_button" href=delete-resource.php?id=` + id + `> Delete </a>
-                              </span>`;
-            }
+              <div class="button-container">
+                <button class="modify-button" onclick="modifyNPO(${id})">Modify</button>
+                <button class="delete-button" onclick="deleteNPO(${id})">Delete</button>
+              </div>
+            `;
             return htmlString;
           }
         }
-      ]
+      ],
+      "initComplete": function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var header = $(column.header());
+
+          // Create the search input box for each column
+          var searchInput = $('<input type="text" class="form-control form-control-sm dt-input" placeholder="Search">')
+            .appendTo(header)
+            .on('keyup change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
+    });
+
+    $('#npoTable').on('click', '.modify-button', function() {
+      var data = $('#npoTable').DataTable().row($(this).parents('tr')).data();
+      var id = data.id;
+      modifyNPO(id); // Call your modify function
+    });
+
+    $('#npoTable').on('click', '.delete-button', function() {
+      var data = $('#npoTable').DataTable().row($(this).parents('tr')).data();
+      var id = data.id;
+      deleteNPO(id); // Call your delete function
     });
   });
 </script>
 </div>
-
 </html>

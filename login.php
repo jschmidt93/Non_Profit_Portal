@@ -10,13 +10,13 @@ $isAdmin = false;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $user_name = $_POST['user_name'];
+    $user_name = $_POST['email'];
     $password = $_POST['password'];
 
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
 
         //read from database
-        $query = "SELECT * FROM users where username = '$user_name' limit 1";
+        $query = "SELECT * FROM users where email = '$user_name' limit 1";
 
         $result = mysqli_query($con, $query);
 
@@ -32,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "login successful";
                     $isAdmin = true;
                     $_SESSION['user_id'] = $user_data['user_id'];
-                    $_SESSION['username'] = $user_data['username'];
-                    $_SESSION['displayname'] = $user_data['displayname'];
-                    $_SESSION['role'] = $user_data['role'];
+                    $_SESSION['permissions'] = $user_data['permissions'];
 
                     header("Location: index.php");
                     die;
@@ -127,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <form method="POST">
                 <div style="font-size: 20px; margin: 10px; color:#F7B733">Login</div>
-                <input id="text" type="text" name="user_name" placeholder="Username"><br><br>
+                <input id="text" type="text" name="email" placeholder="Email"><br><br>
                 <input id="text" type="password" name="password" placeholder="Password"><br><br>
 
                 <input id="button" type="submit" value="LOGIN"><br><br>

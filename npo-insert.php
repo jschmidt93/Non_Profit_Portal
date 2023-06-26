@@ -2,11 +2,17 @@
 
 require_once "connection.php";
 
- $topic = $_POST['topic'];
- $description = $_POST['description'];
- $keywords = $_POST['keywords'];
+ $name = $_POST['name'];
  $type = $_POST['type'];
- $link = $_POST['link'];
+ $description = $_POST['description'];
+ $address = $_POST['address'];
+ $city = $_POST['city'];
+ $state = $_POST['state'];
+ $email = $_POST['email'];
+ $phone = $_POST['phone'];
+ $website = $_POST['website'];
+ $logo_url = $_POST['logo_url'];
+
 
  //create connection
  $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -15,13 +21,13 @@ require_once "connection.php";
     die('Connect Error('.mysqli_connect_errno().')'.mysqli_connect_error());
  }else{
 
-   $stmt = $conn->prepare("INSERT INTO resources(id, topic, description, type, keywords, link, instructor_id) values(NULL,?,?,?,?,?,1)");
-    $stmt->bind_param("sssss",$topic,$description,$type,$keywords,$link);
+   $stmt = $conn->prepare("INSERT INTO organization(id, name, type, description, address, city, state, email, phone, website, logo_url) values(NULL,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssssssssss",$name,$type,$description,$address,$city,$state,$email,$phone,$website,$logo_url);
     $stmt->execute();
     echo "New resource added successfully";
     $stmt->close();
     $conn->close();
-    header("Location: resource-list.php");
+    header("Location: npo-list.php");
       die;
  }
 
