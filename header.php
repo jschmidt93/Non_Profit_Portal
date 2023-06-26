@@ -9,13 +9,7 @@ session_start();
   <a href="npo-list.php" rel="noreferrer noopener" class="home-link">
     Resource List
   </a>
-  <a href="summary.php" rel="noreferrer noopener" class="home-link">
-    Summary
-  </a>
-  <a href="glossary.php" rel="noreferrer noopener" class="home-link1">
-    <span class="home-text">Glossary</span>
-    <br />
-  </a>
+  
   <span>
     <label>Search</label>
     <input id="searchInput" type="text" name="search" value="<?php if (isset($_POST['search'])) {
