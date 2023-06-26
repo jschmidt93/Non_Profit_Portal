@@ -11,7 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js" charset="utf8" type="text/javascript"></script>
 
-  <title>Machine Learning Portal</title>
+  <title>Non-Profit Organization Portal</title>
 
 </head>
 <body>
@@ -36,60 +36,44 @@ $conn->set_charset("utf8");
 //create sql
 
 
-$sql = "SELECT * FROM resources ORDER BY RAND()";
+$sql = "SELECT * FROM organization ORDER BY RAND()";
 $result = $conn->query($sql);
 
 if(isset($_POST['filter_option'])){
-if($_POST['filter_option'] == 'intro'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%intro%' OR keywords LIKE '%intro%'";
+if($_POST['filter_option'] == 'private'){
+  $sql = "SELECT * FROM organization WHERE type LIKE 'Private'";
   $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'super_unsuper'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%supervised%' OR keywords LIKE '%supervised%'";
+}else if($_POST['filter_option'] == 'charity'){
+  $sql = "SELECT * FROM organization WHERE type LIKE 'Charity'";
   $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'python'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%python%' OR keywords LIKE '%python%'";
+}else if($_POST['filter_option'] == 'specialized'){
+  $sql = "SELECT * FROM organization WHERE type LIKE 'Specialized'";
   $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'regression'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%regression%' OR keywords LIKE '%regression%'";
+}else if($_POST['filter_option'] == 'educational'){
+  $sql = "SELECT * FROM organization WHERE type LIKE 'Educational'";
   $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'neural'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%neural%' OR keywords LIKE '%neural%'";
+}else if($_POST['filter_option'] == 'housing'){
+  $sql = "SELECT * FROM organization WHERE type LIKE 'Housing'";
   $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'decision'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%decision%' OR keywords LIKE '%decision%'";
-  $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'applications'){
-  $sql = "SELECT * FROM resources WHERE topic LIKE '%applications%' OR keywords LIKE '%applications%'";
-  $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'videos'){
-  $sql = "SELECT * FROM resources WHERE type LIKE '%video%'";
-  $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'websites'){
-  $sql = "SELECT * FROM resources WHERE type LIKE '%website%'";
-  $result = $conn->query($sql);
-}else if($_POST['filter_option'] == 'blogs'){
-  $sql = "SELECT * FROM resources WHERE type LIKE '%blog%'";
+}else if($_POST['filter_option'] == 'showall'){
+  $sql = "SELECT * FROM organization";
   $result = $conn->query($sql);
 }
 }
 
 ?>
 
-<h1 style="text-align:center">Welcome To The Machine Learning Portal</h1>
+<h1 style="text-align:center">Welcome To The Non-Profit Organizations Portal</h1>
 
 <form name="resource_filter" method="POST" style="text-align: center;">
   <select name="filter_option" id="filter_option" onchange="this.form.submit()">
-    <option value="all" selected="selected">Filter Resources</option>
-    <option value="intro">Intro To Machine Learning</option>
-    <option value="super_unsuper">Supervised & Unsupervised</option>
-    <option value="python">Python</option>
-    <option value="regression">Regression</option>
-    <option value="neural">Neural Networks</option>
-    <option value="decision">Decision Trees</option>
-    <option value="applications">Applications</option>
-    <option value="videos">Videos</option>
-    <option value="websites">Websites</option>
-    <option value="blogs">Blogs</option>
+    <option value="all" selected="selected">Filter By Type</option>
+    <option value="private">Private</option>
+    <option value="charity">Charity</option>
+    <option value="specialized">Specialized</option>
+    <option value="educational">Educational</option>
+    <option value="housing">Housing</option>
+    <option value="showall">Show All</option>
   </select>
 
 <main>
@@ -97,22 +81,14 @@ if($_POST['filter_option'] == 'intro'){
 <?php
 require "fetch-thumbnail.php";
 while ($row = mysqli_fetch_assoc($result)) {
-  if($row['type'] == 'video'){
-    $url = $row['link'];
-    $resource_tn = getImg($url);
-  }
-  elseif($row["thumbnail"] == NULL){
-    $resource_tn = "https://techbullion.com/wp-content/uploads/2021/05/technology-5917370_1280.png";
-  } else {
-    $resource_tn = $row["thumbnail"]; ;
-  }
+  
  ?>
  <a style="text-decoration: none" href=<?php echo'view-npo.php?id='. $row["id"];?>>
         <div class="card">
           <div class="card-item">
           <p style="font-size: 14px;" class="resource_type"><?php echo $row["type"]; ?></p>
-              <img src=<?php echo $resource_tn ?> style="width: 250px; height: 180px;">
-              <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["topic"]; ?></p>
+              <img src=<?php echo $row["logo_url"] ?> style="max-width: 200px;">
+              <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["name"]; ?></p>
               
               </a>
               </div>

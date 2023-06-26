@@ -3,7 +3,7 @@
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
-$dbname = "MLPortal";
+$dbname = "npo_db";
 
 if(!$con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname)){
 

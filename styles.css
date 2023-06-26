@@ -1,3 +1,14 @@
+#npoTable_wrapper {
+  width: 100vw;
+  overflow-x: auto;
+}
+
+#npoTable tbody tr td {
+  height: 25px;
+  line-height: 25px;
+}
+
+
 label{
   color:#f3eded;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
