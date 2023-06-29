@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <style type="text/css">
         #bg {
-            background-image: url("https://i.postimg.cc/vHxnz9kP/sincerely-media-p-NQlm-Gv-FC8-unsplash.jpg");
+            background-image: url("/images/loginPageBackground.jpg");
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             width: 100px;
             color: black;
             font-weight: 600;
-            background-color: #F7B733;
+            background-color: #ff0000;
             border: none;
             border-radius: 20px;
 
@@ -121,16 +121,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div id="bg">
         <div id="box">
 
-            <img src="https://i.postimg.cc/Pf3ndv6Q/PortalML.png" width=100%>
+            <img src="/images/non-profit-portal-logo.png" width=100%>
 
             <form method="POST">
-                <div style="font-size: 20px; margin: 10px; color:#F7B733">Login</div>
+                <div style="font-size: 20px; margin: 10px; color:#FFFFFF">Login</div>
                 <input id="text" type="text" name="email" placeholder="Email"><br><br>
                 <input id="text" type="password" name="password" placeholder="Password"><br><br>
 
                 <input id="button" type="submit" value="LOGIN"><br><br>
 
-                <a href="create_account.php" style="color:#4ABDAC">Create Account</a><br><br>
+                <a href="create_account.php" style="color:#FFFFFF">Create Account</a><br><br>
 
                 <span class="status_message"><?php echo $loginAttemptStatus;
                                                 ?></span>

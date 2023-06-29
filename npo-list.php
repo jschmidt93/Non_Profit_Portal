@@ -15,16 +15,7 @@
 </head>
 <?php include "header.php" ?>
 <h1 style="text-align: center;">List of Non-Profit Organizations</h1>
-<?php
-if (isset($_SESSION['permissions'])) {
-  echo '<div class="resource-buttons">
-          <a href="add-npo.php">
-            <button type="button" class="general-button">Add Organization</button>
-          </a>
-        </div>
-        <h1> Hello ' . $_SESSION["user_id"] . ' </h1>';
-}
-?>
+
 <table id="npoTable" class="display" width="100%" cellspacing="0">
   <thead>
     <tr>
@@ -64,10 +55,7 @@ if (isset($_SESSION['permissions'])) {
           "render": function(data, type, row) {
             var id = data.id;
             var htmlString = `
-              <div class="button-container">
-                <button class="modify-button" onclick="modifyNPO(${id})">Modify</button>
-                <button class="delete-button" onclick="deleteNPO(${id})">Delete</button>
-              </div>
+  
             `;
             return htmlString;
           }
@@ -86,18 +74,6 @@ if (isset($_SESSION['permissions'])) {
             });
         });
       }
-    });
-
-    $('#npoTable').on('click', '.modify-button', function() {
-      var data = $('#npoTable').DataTable().row($(this).parents('tr')).data();
-      var id = data.id;
-      modifyNPO(id); // Call your modify function
-    });
-
-    $('#npoTable').on('click', '.delete-button', function() {
-      var data = $('#npoTable').DataTable().row($(this).parents('tr')).data();
-      var id = data.id;
-      deleteNPO(id); // Call your delete function
     });
   });
 </script>

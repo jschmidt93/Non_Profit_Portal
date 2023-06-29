@@ -38,7 +38,7 @@ main .card{
   border-radius: 10px;
   box-shadow:2px 2px black;
   margin: 20px;
-  background-color:#353839;
+  background-color:#b6b6b6;
   padding: 15px;
   justify-content: space-between;
   vertical-align: bottom;
@@ -46,13 +46,13 @@ main .card{
 }
 
 main .card:hover{
-  box-shadow: 2px 2px #4abdac;
+  box-shadow: 2px 2px #210891;
   transform: scale(1.1);
   transition: all .2s ease-in-out;
 }
 
 .resource_type{
-  background-color:#f7b733;
+  background-color:#fd0000;
   text-transform:uppercase;
   vertical-align:bottom;
   justify-content: space-between;
@@ -64,7 +64,7 @@ main .card:hover{
 
 .add-resource-box{
   display:flex;
-  background-color:#353839;
+  background-color:#74c9e6cc;
   border-radius: 20px;
   box-sizing: border-box;
   padding: 20px;
@@ -74,7 +74,7 @@ main .card:hover{
 }
 
 .title {
-  color:#f7b733;
+  color:#211683;
   font-family: sans-serif;
   font-size: 36px;
   font-weight: 600;
@@ -159,11 +159,11 @@ main .card:hover{
 }
 
 .input:focus ~ .placeholder {
-  color:#f7b733;
+  color:#291e92;
 }
 
 .submit {
-  background-color:#f7b733;
+  background-color:#291e92;
   border-radius: 12px;
   border: 0;
   box-sizing: border-box;
@@ -178,7 +178,7 @@ main .card:hover{
 }
 
 .submit:active {
-  background-color:#fc4a1a;
+  background-color:#1afc52;
 }
 
 
@@ -200,7 +200,7 @@ svg {
 }
 
 .trigger_search{
-  background:#f7b733;
+  background:#000000;
   border: 0;
   border-radius: 100px;
   width: auto;
@@ -268,7 +268,7 @@ i{
 
   h1{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color:#f7b733;
+    color:#FFFFFF;
   }
 
   p{
@@ -432,12 +432,12 @@ i{
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: #1c1c1c;
+    background-color: #b0a0a0;
     margin: 0;
   }
   .home-header {
 
-    background-color:#1c1c1c;
+    background-color:#f38282;
     margin-top: 2em;
     margin-bottom: 2em;
     width: 100%;
@@ -465,7 +465,7 @@ i{
     text-decoration: none;
   }
   .home-link:hover {
-    color: #f7b733;
+    color: #501005;
   }
   .home-link1 {
     color: rgb(255, 255, 255);
@@ -475,10 +475,10 @@ i{
     text-decoration: none;
   }
   .home-link1:hover {
-    color: #f7b733;
+    color: #f73333;
   }
   .home-text:hover {
-    color: #f7b733;
+    color: #f73333;
   }
   .home-link2 {
     color: rgb(255, 255, 255);
@@ -488,7 +488,7 @@ i{
     text-decoration: none;
   }
   .home-link2:hover {
-    color: #f7b733;
+    color: #f73333;
   }
   .home-icon-group {
     display: flex;
@@ -508,7 +508,7 @@ i{
     transition: 0.3s;
   }
   .home-icon02:hover {
-    fill: #f7b733;
+    fill: #ff0000;
   }
   .home-select {
     width: 168px;
@@ -530,7 +530,7 @@ i{
     border-radius: 10px;
     text-transform: capitalize;
     
-    background-color: #f7b733;
+    background-color: #291e92;
   }
 
   .login-button{
@@ -549,7 +549,7 @@ i{
     border-radius: 10px;
     text-transform: capitalize;
     
-    background-color: #f7b733;
+    background-color: #999984;
   }
 
   .general-button{
@@ -568,11 +568,11 @@ i{
     border-radius: 10px;
     text-transform: capitalize;
     
-    background-color: #4abdac;
+    background-color: #ff0000;
   }
 
   .general-button:hover{
-    background-color:#fc4a1a;
+    background-color:#ff0000;
   }
 
   .resource-buttons{
@@ -603,11 +603,11 @@ i{
   }
 
   .admin-button:hover{
-    background-color:#fc4a1a;
+    background-color:#ff0000;
   }
  
   .home-button:hover {
-    background-color: #fc4a1a;
+    background-color: #ff0000;
   }
   .home-icon04 {
     fill: #ffffff;
@@ -616,7 +616,7 @@ i{
     transition: 0.3s;
   }
   .home-icon04:hover {
-    fill: #f7b733;
+    fill: #5d33f7;
   }
   .home-mobile-menu {
     top: 0px;

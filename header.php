@@ -4,20 +4,12 @@ session_start();
 <header data-role="Header" class="home-header">
   <img alt="image" src="./images/non-profit-portal-logo.png" loading="eager" class="home-image" />
   <a href="index.php" rel="noreferrer noopener" class="home-link">
-    Home
+    NPO Grid View
   </a>
-  <a href="npo-list.php" rel="noreferrer noopener" class="home-link">
-    Resource List
+  <a href="admin_npo-list.php" rel="noreferrer noopener" class="home-link1">
+    <span class="home-text">NPO List View</span>
+    <br />
   </a>
-  
-  <span>
-    <label>Search</label>
-    <input id="searchInput" type="text" name="search" value="<?php if (isset($_POST['search'])) {
-                                                                echo $_POST['search'];
-                                                              } ?>">
-    <button id="searchButton" onclick="search()"> Submit </button>
-  </span>
-
   <script>
     function search() {
       searchText = document.getElementById("searchInput").value;
