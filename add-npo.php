@@ -10,7 +10,7 @@
 <body>
 <?php include('header.php'); ?>
 
-<div class="add-resource-box" style="margin: 0 auto;">
+<div class="add-npo-box" style="margin: 0 auto;">
 <form action="npo-insert.php" method="POST">
 
     <h1>Add An Organization</h1>

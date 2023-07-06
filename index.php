@@ -18,13 +18,6 @@
 
 <?php include "header.php"; 
 require_once "connection.php";
-$resource_id = "";
-$resource_topic = "";
-$resource_description = "";
-$resource_type = "";
-$resource_keywords = "";
-$resource_links = "";
-$resource_userID = "";
 
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 // establist connection with database
@@ -65,7 +58,7 @@ if($_POST['filter_option'] == 'private'){
 
 <h1 style="text-align:center">Welcome To The Non-Profit Organizations Portal</h1>
 
-<form name="resource_filter" method="POST" style="text-align: center;">
+<form name="npo_filter" method="POST" style="text-align: center;">
   <select name="filter_option" id="filter_option" onchange="this.form.submit()">
     <option value="all" selected="selected">Filter By Type</option>
     <option value="private">Private</option>
@@ -86,7 +79,7 @@ while ($row = mysqli_fetch_assoc($result)) {
  <a style="text-decoration: none" href=<?php echo'view-npo.php?id='. $row["id"];?>>
         <div class="card">
           <div class="card-item">
-          <p style="font-size: 14px;" class="resource_type"><?php echo $row["type"]; ?></p>
+          <p style="font-size: 14px;" class="npo_type"><?php echo $row["type"]; ?></p>
               <img src=<?php echo $row["logo_url"] ?> style="max-width: 200px;">
               <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["name"]; ?></p>
               
