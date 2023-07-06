@@ -2,11 +2,11 @@
 session_start();
 ?>
 <header data-role="Header" class="home-header">
-  <img alt="image" src="./images/non-profit-portal-logo.png" loading="eager" class="home-image" />
+  <a href="index.php"><img alt="image" src="./images/non-profit-portal-logo.png" loading="eager" class="home-image" /></a>
   <a href="index.php" rel="noreferrer noopener" class="home-link">
     NPO Grid View
   </a>
-  <a href="admin_npo-list.php" rel="noreferrer noopener" class="home-link1">
+  <a href="npo-list.php" rel="noreferrer noopener" class="home-link1">
     <span class="home-text">NPO List View</span>
     <br />
   </a>

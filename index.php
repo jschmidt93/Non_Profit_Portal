@@ -86,7 +86,7 @@ while ($row = mysqli_fetch_assoc($result)) {
  <a style="text-decoration: none" href=<?php echo'view-npo.php?id='. $row["id"];?>>
         <div class="card">
           <div class="card-item">
-          <p style="font-size: 14px;" class="resource_type"><?php echo $row["type"]; ?></p>
+          <p style="font-size: 14px;" class="npo_type"><?php echo $row["type"]; ?></p>
               <img src=<?php echo $row["logo_url"] ?> style="max-width: 200px;">
               <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["name"]; ?></p>
               

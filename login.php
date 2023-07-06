@@ -1,9 +1,10 @@
 <?php
 
-session_start();
+
 
 include("connection.php");
 include("functions.php");
+include("header.php");
 
 $loginAttemptStatus = "";
 $isAdmin = false;
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-
+<link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
