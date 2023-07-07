@@ -2,11 +2,6 @@
 2. import the sql file
 
 logins
-
-admin
-username: test
-password: test
-
-visitor/instructor
-username: test_instructor
-password: test
+u: normaladmin@gmail.com p:abc123 (Admin Permissions)
+u: superadmin@gmail.com p:123abc (Super Admin Permissions)
+u: test@gmail.com p:123abc (Admin Permissions)

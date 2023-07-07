@@ -11,7 +11,7 @@
   <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js" charset="utf8" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-  <title>Non-Profit Organizations</title>
+  <title>List of Non-Profit Organizations</title>
 </head>
 
 <?php
@@ -19,28 +19,22 @@ include_once "header.php";
 require_once "connection.php";
 
 $loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] :null;
-  // Block unauthorized users from accessing the page
- // if (isset($_SESSION['permissions'])) {
-   // if ($_SESSION['permissions'] != 'admin') {
-    //  http_response_code(403);
-    //  die('Forbidden');
-   // }
- // } else {
-   // http_response_code(403);
-  //  die('Forbidden');
- // }
+
+
  ?>
 
 
 <h1 style="text-align: center;">List of Non-Profit Organizations</h1>
 <?php
-if (isset($_SESSION['permissions']) && $_SESSION['permissions'] === 'admin') {
+if (isset($_SESSION['permissions']) && ($_SESSION['permissions'] === 'admin' || $_SESSION['permissions'] === 'super')) {
   echo '<div class="resource-buttons">
           <a href="add-npo.php">
             <button type="button" class="general-button">Add Organization</button>
           </a>
-        </div>
-        <h1> Hello User ' . $_SESSION["user_id"] . ' </h1>';
+        </div>';
+        if(isset($_SESSION["first_name"])){
+          echo '<h1> Hello ' . $_SESSION["first_name"] . '! </h1>';
+}
 }
 ?>
 <table id="npoTable" class="display" width="100%" cellspacing="0">

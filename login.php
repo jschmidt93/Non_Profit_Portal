@@ -10,7 +10,6 @@ $loginAttemptStatus = "";
 $isAdmin = false;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
     $user_name = $_POST['email'];
     $password = $_POST['password'];
 
@@ -18,22 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //read from database
         $query = "SELECT * FROM users where email = '$user_name' limit 1";
-
         $result = mysqli_query($con, $query);
 
         if ($result) {
-
             if ($result && mysqli_num_rows($result) > 0) {
-
                 $user_data = mysqli_fetch_assoc($result);
 
                 if ($user_data['password'] == $password) {
-
-                    $loginAttemptStatus = "Login Successfull";
-                    echo "login successful";
+                    $loginAttemptStatus = "Login Successful";
+                    echo "Login successful";
                     $isAdmin = true;
                     $_SESSION['user_id'] = $user_data['user_id'];
                     $_SESSION['permissions'] = $user_data['permissions'];
+                    $_SESSION['first_name'] = $user_data['first_name']; 
 
                     header("Location: index.php");
                     die;
@@ -43,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $loginAttemptStatus = "Invalid Credentials";
     } else {
-
         echo "Account Information Not Accepted.";
     }
 }

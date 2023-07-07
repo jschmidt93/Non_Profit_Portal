@@ -1,9 +1,11 @@
 <?php
 
-session_start();
+
 
 include("connection.php");
 include("functions.php");
+include("header.php");
+
 $createAccountStatus = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -16,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $createAccountStatus = "Account Created Successfully";
 
-        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', '$password', '$displayname','instructor')";
+        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', '$password', '$displayname')";
 
         mysqli_query($con, $query);
 
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-
+<link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

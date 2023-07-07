@@ -10,54 +10,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js" charset="utf8" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-    <title>Modify Resource</title>
+    <title>Modify Non-Profit Organization</title>
 </head>
 
 <body>
-    <?php
-    if (isset($_GET["id"])) {
-        require_once "connection.php";
-        include "header.php";
+<?php
 
-        $id = $_GET["id"];
-        
-        
+if (isset($_GET["id"])) {
+    require_once "connection.php";
+    include "header.php";
 
+    $id = $_GET["id"];
 
-        $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-        // establish connection with database
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        //set charset to utf-8
-        $conn->set_charset("utf8");
-
-        //create sql
-
-        $sql = "SELECT * FROM organization WHERE id={$id}";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $id = $row["id"];
-            $name = $row["name"];
-            $type = $row["type"];
-            $description = $row["description"];
-            $address = $row["address"];
-            $city = $row["city"];
-            $state = $row["state"];
-            $email = $row["email"];
-            $phone = $row["phone"];
-            $website = $row["website"];
-            $logo_url = $row["logo_url"];
-
-        }
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    // establish connection with database
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-    ?>
-    <div class="add-npo-box">
-    <form action="modify-query.php?id=<?php echo $id;?>" method="POST" style="margin: 0 auto;">
-    <h1>Add An Organization</h1>
+    // set charset to utf-8
+    $conn->set_charset("utf8");
 
-    <label for="name">Non-Profit Name</label>
-    <input id="name" class="input" type="text" maxlength="100" name="name" required value="<?php echo $name; ?>" /><br><br>
+    // create sql
+    $sql = "SELECT * FROM organization WHERE id={$id}";
+    $result = $conn->query($sql);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $name = $row["name"];
+        $type = $row["type"];
+        $description = $row["description"];
+        $address = $row["address"];
+        $city = $row["city"];
+        $state = $row["state"];
+        $email = $row["email"];
+        $phone = $row["phone"];
+        $website = $row["website"];
+        $logo_url = $row["logo_url"];
+    }
+    $orgId = $id; // Assign the organization ID separately
+}
+?>
+
+<div class="add-npo-box">
+    <form action="modify-query.php?id=<?php echo $orgId; ?>" method="POST" style="margin: 0 auto;">
+        <h1>Modify Non-Profit Organization</h1>
+
+        <label for="name">Non-Profit Name</label>
+        <input id="name" class="input" type="text" maxlength="100" name="name" required value="<?php echo $name; ?>" /><br><br>
 
     <label for="type">Type</label>
     <select id="type" class="input" name="type" required>

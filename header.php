@@ -10,13 +10,7 @@ session_start();
     <span class="home-text">NPO List View</span>
     <br />
   </a>
-  <script>
-    function search() {
-      searchText = document.getElementById("searchInput").value;
-      searchUrl = "search-results.php?search=" + searchText;
-      window.location.href = searchUrl;
-    }
-  </script>
+  
 
   <?php
   if (!isset($_SESSION['permissions'])) {
