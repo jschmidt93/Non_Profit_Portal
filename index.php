@@ -72,7 +72,7 @@ if($_POST['filter_option'] == 'private'){
 <main>
 
 <?php
-require "fetch-thumbnail.php";
+
 while ($row = mysqli_fetch_assoc($result)) {
   
  ?>

@@ -29,7 +29,7 @@ if ($conn->query($sql) === TRUE) {
   }
 $con->close();
 
-header("location: admin_npo-list.php");
+header("location: npo-list.php");
 exit();
 
 ?>
