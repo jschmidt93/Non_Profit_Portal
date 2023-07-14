@@ -17,8 +17,11 @@
 <?php
 include_once "header.php"; 
 require_once "connection.php";
+require_once('nonprofit-class.php');
+require_once('database-connection-handler.php');
 
 $loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] :null;
+echo $loggedInUserID;
 
 
  ?>
@@ -84,11 +87,11 @@ if (isset($_SESSION['permissions']) && ($_SESSION['permissions'] === 'admin' || 
                 <td>';
 
                 if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
-                  echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
-                          <input type="hidden" name="id" value="' . $row["id"] . '">
-                          <input type="submit" id="admin_buttons" name="delete" value="Delete" />
+                  echo '<form action=\'delete-query.php\' method=\'POST\'>
+                          <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
+                          <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
                         </form>
-                        <form action=\'modify-npo.php\' method=\'POST\'>
+                        <form action=\'npo-update-form.php\' method=\'POST\'>
                           <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
                           <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
                         </form>';
@@ -99,7 +102,7 @@ if (isset($_SESSION['permissions']) && ($_SESSION['permissions'] === 'admin' || 
                   <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
                   <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
                 </form>
-                <form action=\'modify-npo.php\' method=\'POST\'>
+                <form action=\'npo-update-form.php\' method=\'POST\'>
                   <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
                   <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
                 </form>';
