@@ -12,129 +12,150 @@
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
   <title>List of Non-Profit Organizations</title>
+
+  <style>
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    #npoTable_wrapper{
+      overflow-x: hidden;
+    }
+
+    #npoTable {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    #npoTable td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px; /* Adjust the max-width value as per your preference */
+    }
+  </style>
 </head>
 
-<?php
-include_once "header.php"; 
-require_once "connection.php";
+<body>
+  <?php
+  include_once "header.php";
+  require_once "connection.php";
 
-$loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] :null;
+  $loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+  ?>
 
+  <h1 style="text-align: center;">List of Non-Profit Organizations</h1>
+  <?php
+  if (isset($_SESSION['permissions']) && ($_SESSION['permissions'] === 'admin' || $_SESSION['permissions'] === 'super')) {
+    echo '<div class="resource-buttons">
+            <a href="add-npo.php">
+              <button type="button" class="general-button">Add Organization</button>
+            </a>
+          </div>';
+    if (isset($_SESSION["first_name"])) {
+      echo '<h1> Hello ' . $_SESSION["first_name"] . '! </h1>';
+    }
+  }
+  ?>
+  <div class="table-container">
+    <table id="npoTable" class="display" cellspacing="0">
+      <thead>
+        <tr>
+          <th style="color: white;">id</th>
+          <th style="color: white;">name</th>
+          <th style="color: white;">type</th>
+          <th style="color: white;">description</th>
+          <th style="color: white;">address</th>
+          <th style="color: white;">city</th>
+          <th style="color: white;">state</th>
+          <th style="color: white;">country</th>
+          <th style="color: white;">email</th>
+          <th style="color: white;">phone</th>
+          <th style="color: white;">website</th>
+          <th style="color: white;">logo_url</th>
+          <th style="color: white;">creation_date</th>
+          <th style="color: white;">last_updated</th>
+          <th style="color: white;">actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        $sql = "SELECT * FROM organization";
+        $result = $conn->query($sql);
 
- ?>
+        if ($result->num_rows > 0) {
+          // Create table with data from each row
+          while ($row = $result->fetch_assoc()) {
+            echo '<tr onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">
+                    <td>' . $row["id"] . '</td>
+                    <td>' . $row["name"] . '</td>
+                    <td>' . $row["type"] . '</td>
+                    <td>' . $row["description"] . '</td>
+                    <td>' . $row["address"] . '</td>
+                    <td>' . $row["city"] . '</td>
+                    <td>' . $row["state"] . '</td>
+                    <td>' . $row["country"] . '</td>
+                    <td>' . $row["email"] . '</td>
+                    <td>' . $row["phone"] . '</td>
+                    <td>' . $row["website"] . '</td>
+                    <td>' . $row["logo_url"] . '</td>
+                    <td>' . $row["creation_date"] . '</td>
+                    <td>' . $row["last_updated"] . '</td>
+                    <td>';
 
+            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
+              echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
+                      <input type="hidden" name="id" value="' . $row["id"] . '">
+                      <input type="submit" id="admin_buttons" name="delete" value="Delete" />
+                    </form>
+                    <form action="modify-npo.php?id=' . $row["id"] . '" method="POST">
+                      <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
+                      <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
+                    </form>';
+            }
 
-<h1 style="text-align: center;">List of Non-Profit Organizations</h1>
-<?php
-if (isset($_SESSION['permissions']) && ($_SESSION['permissions'] === 'admin' || $_SESSION['permissions'] === 'super')) {
-  echo '<div class="resource-buttons">
-          <a href="add-npo.php">
-            <button type="button" class="general-button">Add Organization</button>
-          </a>
-        </div>';
-        if(isset($_SESSION["first_name"])){
-          echo '<h1> Hello ' . $_SESSION["first_name"] . '! </h1>';
-}
-}
-?>
-<table id="npoTable" class="display" width="100%" cellspacing="0">
-  <thead>
-    <tr>
-    <th style="color: white;">id</th>
-    <th style="color: white;">name</th>
-    <th style="color: white;">type</th>
-    <th style="color: white;">description</th>
-    <th style="color: white;">address</th>
-    <th style="color: white;">city</th>
-    <th style="color: white;">state</th>
-    <th style="color: white;">country</th>
-    <th style="color: white;">email</th>
-    <th style="color: white;">phone</th>
-    <th style="color: white;">website</th>
-    <th style="color: white;">logo_url</th>
-    <th style="color: white;">creation_date</th>
-    <th style="color: white;">last_updated</th>
-      <th style="color: white;">actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    $sql = "SELECT * FROM organization";
-    $result = $conn->query($sql);
+            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
+              echo '<form action=\'delete-query.php\' method=\'POST\'>
+                      <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
+                      <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
+                    </form>
+                    <form action="modify-npo.php?id=' . $row["id"] . '" method="POST">
+                      <input type="hidden" name="id" value="' . $row["id"] . '">
+                      <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
+                    </form>';
+            }
 
-    if ($result->num_rows > 0) {
-      // Create table with data from each row
-      while ($row = $result->fetch_assoc()) {
-        echo '<tr>
-                <td>' . $row["id"]. '</td>
-                <td>' . $row["name"]. '</td>
-                <td>' . $row["type"].'</td>
-                <td>'. $row["description"]. '</td>
-                <td>' .$row["address"]. '</td>
-                <td>' . $row["city"].'</td>
-                <td>' . $row["state"]. '</td>
-                <td>' . $row["country"]. '</td>
-                <td>' . $row["email"]. '</td>
-                <td>' . $row["phone"]. '</td>
-                <td>' . $row["website"]. '</td>
-                <td>' . $row["logo_url"]. '</td>
-                <td>' . $row["creation_date"]. '</td>
-                <td>' . $row["last_updated"]. '</td>
-                <td>';
-
-                if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
-                  echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
-                          <input type="hidden" name="id" value="' . $row["id"] . '">
-                          <input type="submit" id="admin_buttons" name="delete" value="Delete" />
-                        </form>
-                        <form action=\'modify-npo.php\' method=\'POST\'>
-                          <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
-                          <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
-                        </form>';
-                }
-        
-        if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
-          echo '<form action=\'delete-query.php\' method=\'POST\'>
-                  <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
-                  <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
-                </form>
-                <form action=\'modify-npo.php\' method=\'POST\'>
-                  <input type=\'hidden\' name=\'id\' value=\''.$row["id"].'\'>
-                  <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
-                </form>';
+            echo '</td></tr>';
+          }
+        } else {
+          echo "<tr><td colspan='14'>0 results</td></tr>";
         }
+        $result->close();
+        ?>
+      </tbody>
+    </table>
+  </div>
 
-        echo '</td></tr>';
-      }
-    } else {
-      echo "<tr><td colspan='14'>0 results</td></tr>";
-    }
-    $result->close();
-    ?>
-  </tbody>
-</table>
+  <script>
+    $(document).ready(function () {
+      var table = $('#npoTable').DataTable({
+        initComplete: function () {
+          this.api().columns().every(function () {
+            var column = this;
+            var header = $(column.header());
 
-<script type="text/javascript">
- $(document).ready(function () {
-
-  var table = $('#npoTable').DataTable({
-    initComplete: function () {
-      this.api().columns().every(function () {
-        var column = this;
-        var header = $(column.header());
-
-        // Create the search input box for each column
-        var searchInput = $('<input type="text" class="form-control form-control-sm dt-input" placeholder="Search">')
-          .appendTo(header)
-          .on('keyup change', function () {
-            column.search($(this).val(), false, false, true).draw();
+            // Create the search input box for each column
+            var searchInput = $('<input type="text" class="form-control form-control-sm dt-input" placeholder="Search">')
+              .appendTo(header)
+              .on('keyup change', function () {
+                column.search($(this).val(), false, false, true).draw();
+              });
           });
+        }
       });
-    }
-  });
-});
-
-</script>
-</div>
+    });
+  </script>
+</body>
 </html>

@@ -83,7 +83,9 @@
                         <p><b><?php echo $npo_website; ?></b></p>
                     </div>
                     
-                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Back</a>
+                    <a href="modify-npo.php?id=<?php echo $npo_id; ?>" class="btn btn-primary">Modify</a></p>
+                    
                 </div>
             </div>
         </div>

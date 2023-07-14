@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE organization SET name='{$name}', type='{$type}', description='{$description}', address='{$address}', city='{$city}', state='{$state}', email='{$email}', phone='{$phone}', website='{$phone}', logo_url='{$logo_url}' WHERE id='{$_GET['id']}'";
+$sql = "UPDATE organization SET name='{$name}', type='{$type}', description='{$description}', address='{$address}', city='{$city}', state='{$state}', email='{$email}', phone='{$phone}', website='{$website}', logo_url='{$logo_url}' WHERE id='{$_GET['id']}'";
 echo $sql;
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";
