@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js" charset="utf8" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+    <link rel="icon" href="/images/npo-favicon.png" type="image/x-icon">
     <style>
         .wrapper {
             width: 50%;
@@ -84,7 +85,7 @@
                     </div>
                     
                     <p><a href="index.php" class="btn btn-primary">Back</a>
-                    <a href="modify-npo.php?id=<?php echo $npo_id; ?>" class="btn btn-primary">Modify</a></p>
+                    
                     
                 </div>
             </div>

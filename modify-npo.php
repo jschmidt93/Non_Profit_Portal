@@ -60,7 +60,7 @@ if (isset($_GET["id"])) {
 ?>
 <div class="wrapper">
 <div class="add-npo-box">
-    <form action="modify-query.php?id=<?php echo $npo_id; ?>" method="POST" style="margin: 0 auto;">
+    <form onsubmit="handleFormSubmission();" action="modify-query.php?id=<?php echo $npo_id; ?>" method="POST" style="margin: 0 auto;">
         <h1>Modify Non-Profit Organization</h1>
 
         <label for="name">Non-Profit Name</label>
@@ -152,10 +152,17 @@ if (isset($_GET["id"])) {
     <label for="logo_url">Logo URL</label>
     <input id="logo_url" class="input" type="url" name="logo_url" required value="<?php echo $npo_logo_url; ?>" /><br><br>
 
-    <input type="submit" value="Update" class="general-button" />
+    <input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
 </form>
     </div>
 </div>
+<script>
+    // JavaScript function to handle the form submission
+    function handleFormSubmission() {
+      // Show the confirmation message
+      alert('Entry updated successfully!');
+    }
+  </script>
 </body>
 
 </html>
