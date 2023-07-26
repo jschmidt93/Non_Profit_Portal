@@ -12,7 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js" charset="utf8" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-    <link rel="icon" href="/images/npo-favicon.png" type="image/x-icon">
     <style>
         .wrapper {
             width: 50%;
@@ -50,7 +49,7 @@
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $npo_id = $row["id"];
-            $npo_logo = $row["logo_url"];
+            $npo_logo = $row["logo"];
             $npo_name = $row["name"];
             $npo_type = $row["type"];
             $npo_description = $row["description"];
@@ -64,7 +63,7 @@
             <div class="row">
                 <div class="col-md-12">
                 <div class="form-group">
-                        <p><b><?php echo '<img src="'.$npo_logo.'" style="max-width: 300px;">'; ?></b></p>
+                    <!--    <p><b><?php echo '<img src="logos/' .$npo_logo .'" style="max-width: 300px;">'; ?></b></p> -->
                     </div>
                     <h1 class="mt-5 mb-3"><?php echo $npo_name; ?></h1>
                     <div class="form-group">
@@ -83,10 +82,10 @@
                         <label>Website</label>
                         <p><b><?php echo $npo_website; ?></b></p>
                     </div>
-                    
-                    <p><a href="index.php" class="btn btn-primary">Back</a>
-                    
-                    
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <p><b><?php echo '<img src="logos/' .$npo_logo .'" style="max-width: 300px;">'; ?></b></p>
+                    </div>                    
                 </div>
             </div>
         </div>
