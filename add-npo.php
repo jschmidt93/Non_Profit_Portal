@@ -11,7 +11,7 @@
 <?php include('header.php'); ?>
 
 <div class="add-npo-box" style="margin: 0 auto;">
-<form onsubmit="handleFormSubmission();" action="npo-insert.php" method="POST">
+<form action="npo-insert.php" method="POST">
 
     <h1>Add An Organization</h1>
 
@@ -105,17 +105,10 @@
 <input id="logo_url" class="input" type="url" name="logo_url" required/><br><br>
 
 
-    <input onclick="return confirm('Are You Sure You Want To Add This Non-Profit Organization?');" type="submit" value="Submit" class="general-button"/>
+    <input type="submit" value="Submit" class="general-button"/>
 </form>
 </div>
 
-<script>
-    // JavaScript function to handle the form submission
-    function handleFormSubmission() {
-      // Show the confirmation message
-      alert('Non-Profit Organization Added Successfully!');
-    }
-  </script>
 
 </body>
 </html>

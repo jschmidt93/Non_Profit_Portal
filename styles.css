@@ -24,24 +24,31 @@ label{
 
 .grid-container{
   display: grid;
+  
 }
 
 main{
+ 
   max-width: 1500px;
   width: 95%;
   margin: 30px auto;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content:flex-start;
   margin: auto;
 }
 
 main .card{
-  max-width: 300px;
+  
+  
+  
+  flex-wrap: wrap;
+  flex-direction: row;
   flex: 1 1 210px;
   text-align: center;
   height: 350px;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow:2px 2px black;
   margin: 20px;
@@ -49,6 +56,8 @@ main .card{
   padding: 15px;
   justify-content: space-around;
   vertical-align: center;
+  align-content: space-around;
+  
 
 }
 

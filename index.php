@@ -2,7 +2,7 @@
 <html lang="en" style="background-color: #1c1c1c">
 
 <head>
-<link rel="icon" href="/images/npo-favicon.png" type="image/x-icon">
+
   <link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,7 +69,7 @@ if($_POST['filter_option'] == 'private'){
     <option value="showall">Show All</option>
   </select>
 
-<main> 
+<main>
 
 <?php
 
@@ -80,8 +80,9 @@ while ($row = mysqli_fetch_assoc($result)) {
         <div class="card">
           <div class="card-item">
           <p style="font-size: 14px;" class="npo_type"><?php echo $row["type"]; ?></p>
-              <img src=<?php echo $row["logo_url"] ?> style="max-width: 200px;">
+              <img src=<?php echo $row["logo_url"] ?> style="max-width: 100px;">
               <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["name"]; ?></p>
+              <p style="font-size: 12px; padding:1em;" class="description"><?php echo $row["description"]; ?></p>
               
               </a>
               </div>

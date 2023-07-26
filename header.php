@@ -6,25 +6,18 @@ session_start();
   <a href="index.php" rel="noreferrer noopener" class="home-link">
     NPO Grid View
   </a>
-
   <a href="npo-list.php" rel="noreferrer noopener" class="home-link1">
     <span class="home-text">NPO List View</span>
     <br />
   </a>
-
   
+
   <?php
   if (!isset($_SESSION['permissions'])) {
     echo '
     <a href="login.php">
     <button type="button" class="home-button button" class="login-button">Login</button></a>
     ';
-  }
-  if (isset($_SESSION['permissions'])) {
-    if ($_SESSION['permissions'] == 'super') {
-      echo '<a href="user_list.php">NPO User List</a>';
-      
-    }
   }
 
   if (isset($_SESSION['permissions'])) {
@@ -33,8 +26,6 @@ session_start();
     <button type="button" class="home-button button" class="login-button">Log out</button></a>
     ';
   }
-
-
   ?>
 
 </header>

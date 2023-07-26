@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="background-color: #1c1c1c">
 <head>
-<link rel="icon" href="/images/npo-favicon.png" type="image/x-icon">
   <meta charset="utf-8">
   <link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
   <meta charset="UTF-8">
@@ -89,23 +88,23 @@
         if ($result->num_rows > 0) {
           // Create table with data from each row
           while ($row = $result->fetch_assoc()) {
-            echo '<tr>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["id"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["name"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["type"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["description"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["address"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["city"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["state"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["country"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["email"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["phone"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["website"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["logo_url"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["creation_date"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["last_updated"] . '</div></td>
+            echo '<tr onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">
+                    <td>' . $row["id"] . '</td>
+                    <td>' . $row["name"] . '</td>
+                    <td>' . $row["type"] . '</td>
+                    <td>' . $row["description"] . '</td>
+                    <td>' . $row["address"] . '</td>
+                    <td>' . $row["city"] . '</td>
+                    <td>' . $row["state"] . '</td>
+                    <td>' . $row["country"] . '</td>
+                    <td>' . $row["email"] . '</td>
+                    <td>' . $row["phone"] . '</td>
+                    <td>' . $row["website"] . '</td>
+                    <td>' . $row["logo_url"] . '</td>
+                    <td>' . $row["creation_date"] . '</td>
+                    <td>' . $row["last_updated"] . '</td>
                     <td>';
-        
+
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
               echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
                       <input type="hidden" name="id" value="' . $row["id"] . '">
@@ -116,18 +115,18 @@
                       <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
                     </form>';
             }
-        
+
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
-              echo '<form action=\'delete-query.php\' method=\'POST\' onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
+              echo '<form action=\'delete-query.php\' method=\'POST\'>
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
                     </form>
-                    <form action="modify-npo.php?id=' . $row["id"] . '" method="POST" >
+                    <form action="modify-npo.php?id=' . $row["id"] . '" method="POST">
                       <input type="hidden" name="id" value="' . $row["id"] . '">
                       <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
                     </form>';
             }
-        
+
             echo '</td></tr>';
           }
         } else {
