@@ -101,7 +101,7 @@
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["email"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["phone"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["website"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["logo_url"] . '</div></td>
+                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["logo"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["creation_date"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["last_updated"] . '</div></td>
                     <td>';

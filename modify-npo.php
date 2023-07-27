@@ -28,7 +28,7 @@ $npo_state = "";
 $npo_email = "";
 $npo_phone = "";
 $npo_website = "";
-$npo_logo_url = "";
+$npo_logo = "";
 
 if (isset($_GET["id"])) {
     $npo_id = $_GET["id"];
@@ -53,14 +53,14 @@ if (isset($_GET["id"])) {
         $npo_email = $row["email"];
         $npo_phone = $row["phone"];
         $npo_website = $row["website"];
-        $npo_logo_url = $row["logo_url"];
+        $npo_logo = $row["logo"];
     }
     //$orgId = $id; // Assign the organization ID separately
 }
 ?>
 <div class="wrapper">
 <div class="add-npo-box">
-    <form onsubmit="handleFormSubmission();" action="modify-query.php?id=<?php echo $npo_id; ?>" method="POST" style="margin: 0 auto;">
+    <form onsubmit="handleFormSubmission();" action="modify-query.php?id=<?php echo $npo_id; ?>" method="POST" style="margin: 0 auto;" enctype="multipart/form-data">
         <h1>Modify Non-Profit Organization</h1>
 
         <label for="name">Non-Profit Name</label>
@@ -149,8 +149,8 @@ if (isset($_GET["id"])) {
     <label for="website">Website</label>
     <input id="website" class="input" type="url" name="website" required value="<?php echo $npo_website; ?>" /><br><br>
 
-    <label for="logo_url">Logo URL</label>
-    <input id="logo_url" class="input" type="url" name="logo_url" required value="<?php echo $npo_logo_url; ?>" /><br><br>
+    <label for="logo_url">Upload Logo</label>
+    <input id="logo" name="logo" class="input" type="file"/><br><br>
 
     <input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
 </form>

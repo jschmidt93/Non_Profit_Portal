@@ -80,9 +80,11 @@ while ($row = mysqli_fetch_assoc($result)) {
         <div class="card">
           <div class="card-item">
           <p style="font-size: 14px;" class="npo_type"><?php echo $row["type"]; ?></p>
-              <img src=<?php echo $row["logo_url"] ?> style="max-width: 200px;">
+          <p><b><?php echo '<img src="logos/' . $row["logo"] .'" style="max-width: 150px;">'; ?></b></p>
               <p style="font-size: 20px; padding:1em;" class="topic_name"><?php echo $row["name"]; ?></p>
-              
+              <p style="font-size: 12px; padding:1em;" class="description">
+  <?php echo substr($row["description"], 0, 100); ?>
+</p>
               </a>
               </div>
             </div></br>

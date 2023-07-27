@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $createAccountStatus = "Account Created Successfully";
 
-        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', '$password', '$displayname')";
+        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', 'MD5($password)', '$displayname')";
 
         mysqli_query($con, $query);
 

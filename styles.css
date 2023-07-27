@@ -27,21 +27,29 @@ label{
 }
 
 main{
-  max-width: 1500px;
-  width: 95%;
+ 
+  max-width: 69%;
+  width: 100%;
   margin: 30px auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content:flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
   margin: auto;
 }
 
 main .card{
-  max-width: 300px;
+  
+  
+  
+  flex-wrap: wrap;
+  flex-direction: row;
   flex: 1 1 210px;
   text-align: center;
+  min-width: 250px;
+  max-width: 250px;
   height: 350px;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow:2px 2px black;
   margin: 20px;
@@ -49,6 +57,8 @@ main .card{
   padding: 15px;
   justify-content: space-around;
   vertical-align: center;
+  align-content: space-around;
+  
 
 }
 
@@ -292,6 +302,7 @@ i{
     background-color: #b0a0a0;
     margin: 0;
   }
+
   .home-header {
 
     background-color:#f38282;

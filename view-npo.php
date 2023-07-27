@@ -50,7 +50,7 @@
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $npo_id = $row["id"];
-            $npo_logo = $row["logo_url"];
+            $npo_logo = $row["logo"];
             $npo_name = $row["name"];
             $npo_type = $row["type"];
             $npo_description = $row["description"];
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-md-12">
                 <div class="form-group">
-                        <p><b><?php echo '<img src="'.$npo_logo.'" style="max-width: 300px;">'; ?></b></p>
+                <p><b><?php echo '<img src="logos/'.$npo_logo.'" style="max-width: 300px;">'; ?></b></p>
                     </div>
                     <h1 class="mt-5 mb-3"><?php echo $npo_name; ?></h1>
                     <div class="form-group">

@@ -11,7 +11,7 @@
 <?php include('header.php'); ?>
 
 <div class="add-npo-box" style="margin: 0 auto;">
-<form onsubmit="handleFormSubmission();" action="npo-insert.php" method="POST">
+<form onsubmit="handleFormSubmission();" action="npo-insert.php" method="POST" enctype="multipart/form-data">
 
     <h1>Add An Organization</h1>
 
@@ -101,8 +101,11 @@
 <label for="website">Website</label>
 <input id="website" class="input" type="url" name="website" required/><br><br>
 
-<label for="logo_url">Logo URL</label>
-<input id="logo_url" class="input" type="url" name="logo_url" required/><br><br>
+<label for="logo">Upload Logo</label>
+<input id="logo" name="logo" class="input" type="file"/>
+
+<!-- <label for="logo_url">Logo URL</label>
+<input id="logo_url" class="input" type="url" name="logo_url" required/><br><br> -->
 
 
     <input onclick="return confirm('Are You Sure You Want To Add This Non-Profit Organization?');" type="submit" value="Submit" class="general-button"/>

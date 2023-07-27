@@ -58,7 +58,7 @@ include "header.php";
       <th>State</th>
       <th>Non-Profit Organizations</th>
     </tr>
-    <?php include('states_report.php'); ?>
+    <?php include('states-report.php'); ?>
     <h1>State Report</h1>
   </table>
   <table>
@@ -66,7 +66,7 @@ include "header.php";
       <th>Type</th>
       <th>Non-Profit Organizations</th>
     </tr>
-    <?php include('types_report.php'); ?>
+    <?php include('types-report.php'); ?>
     <h1>Type Report</h1>
   </table>
 
