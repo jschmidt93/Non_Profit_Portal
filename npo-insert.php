@@ -57,9 +57,10 @@ $created_by = "";
     die('Connect Error('.mysqli_connect_errno().')'.mysqli_connect_error());
  }else{
 
-  $stmt = $conn->prepare("INSERT INTO organization(id, name, type, description, address, city, state, email, phone, website, logo, created_by) values(NULL,?,?,?,?,?,?,?,?,?,?,?)");
-  $stmt->bind_param("ssssssssssi",$name,$type,$description,$address,$city,$state,$email,$phone,$website,$logo,$created_by);
-    $stmt->execute();
+  $stmt = $conn->prepare("INSERT INTO organization(name, type, description, address, city, state, email, phone, website, logo, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssssssis", $name, $type, $description, $address, $city, $state, $email, $phone, $website, $logo, $created_by);
+$stmt->execute();
+
     echo "New resource added successfully";
     $stmt->close();
     $conn->close();
