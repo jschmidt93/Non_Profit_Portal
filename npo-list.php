@@ -77,7 +77,13 @@
           <th style="color: white;">logo_url</th>
           <th style="color: white;">creation_date</th>
           <th style="color: white;">last_updated</th>
+          <?php  
+            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
+              echo '<th style="color: white;">Npo_Admin</th>';}
+            ?>
           <th style="color: white;">actions</th>
+        
+          
         </tr>
       </thead>
       <tbody>
@@ -105,6 +111,13 @@
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["creation_date"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["last_updated"] . '</div></td>
                     <td>';
+                    if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
+                      echo '<div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["created_by"] . '</div></td>
+                      <td>';
+                      ;
+                  }
+                  
+                  
         
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
               echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
@@ -115,6 +128,8 @@
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
                     </form>';
+                
+                  
             }
         
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {

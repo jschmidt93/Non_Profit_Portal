@@ -41,6 +41,7 @@ $email = $_POST['email'];
 $phone = $_POST['phone'];
 $website = $_POST['website'];
 $logo = trim(process_upload_file());
+$npo_admin = $_POST['npo_admin'];
 echo 'logo:' . $logo . '<br>';
 
  //create connection
@@ -50,7 +51,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE organization SET name='{$name}', type='{$type}', description='{$description}', address='{$address}', city='{$city}', state='{$state}', email='{$email}', phone='{$phone}', website='{$website}', logo='{$logo}' WHERE id='{$_GET['id']}'";
+$sql = "UPDATE organization SET name='{$name}', type='{$type}', description='{$description}', address='{$address}', city='{$city}', state='{$state}', email='{$email}', phone='{$phone}', website='{$website}', logo='{$logo}', created_by='{$npo_admin}' WHERE id='{$_GET['id']}'";
 echo $sql;
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";

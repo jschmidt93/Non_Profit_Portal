@@ -29,6 +29,7 @@ $npo_email = "";
 $npo_phone = "";
 $npo_website = "";
 $npo_logo = "";
+$npo_admin ="";
 
 if (isset($_GET["id"])) {
     $npo_id = $_GET["id"];
@@ -54,6 +55,7 @@ if (isset($_GET["id"])) {
         $npo_phone = $row["phone"];
         $npo_website = $row["website"];
         $npo_logo = $row["logo"];
+        $npo_admin = $row["created_by"];
     }
     //$orgId = $id; // Assign the organization ID separately
 }
@@ -151,6 +153,9 @@ if (isset($_GET["id"])) {
 
     <label for="logo_url">Upload Logo</label>
     <input id="logo" name="logo" class="input" type="file"/><br><br>
+
+    <label for="npo_admin">Npo Admin</label>
+    <input id="npo_admin" class="input" type="text" maxlength="100" name="npo_admin" required value="<?php echo $npo_admin; ?>" /><br><br>
 
     <input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
 </form>
