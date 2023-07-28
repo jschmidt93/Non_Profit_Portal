@@ -14,11 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $password = $_POST['password'];
     $displayname = $_POST['first_name'];
 
+    $hash_pass = password_hash($password,PASSWORD_DEFAULT);
+
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
 
         $createAccountStatus = "Account Created Successfully";
 
-        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', 'MD5($password)', '$displayname')";
+        $query = "insert into users (email, password, first_name) values ('$user_name', '$hash_pass', '$displayname')";
 
         mysqli_query($con, $query);
 
