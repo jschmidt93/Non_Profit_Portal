@@ -35,7 +35,6 @@
         $npo_description = "";
         $npo_phone = "";
         $npo_website = "";
-        $npo_admin ="";
 
         $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
         // establist connection with database
@@ -56,17 +55,20 @@
             $npo_type = $row["type"];
             $npo_description = $row["description"];
             $npo_phone = $row["phone"];
+            $npo_email = $row["email"];
             $npo_website = $row["website"];
-            $npo_admin = $row["created_by"];
         }
     }
+    $image_tag = '<img src="logos/'.$npo_logo.'" style="max-width: 300px;">';
+    $clickable_logo = '<a href="' . $npo_website . '">' . $image_tag . '</a>';
     ?>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                 <div class="form-group">
-                <p><b><?php echo '<img src="logos/'.$npo_logo.'" style="max-width: 300px;">'; ?></b></p>
+                <!-- <p><b><?php echo '<img src="logos/'.$npo_logo.'" style="max-width: 300px;">'; ?></b></p> -->
+                <p><b><?php echo $clickable_logo; ?></b></p>
                     </div>
                     <h1 class="mt-5 mb-3"><?php echo $npo_name; ?></h1>
                     <div class="form-group">
@@ -82,15 +84,16 @@
                         <p><b><?php echo $npo_phone; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Website</label>
-                        <p><b><?php echo $npo_website; ?></b></p>
+                        <label>Email</label>
+                        <p><b><?php echo '<a href="mailto:"' . $npo_email . '">' . $npo_email . '</a>'; ?></b></p>
                     </div>
+
                     <div class="form-group">
-                        <label> Npo Admin </label>
-                        <p><b><?php echo $npo_admin; ?></b></p>
+                        <label>Website</label>
+                        <p><b><?php echo '<a href="' . $npo_website . '">' . $npo_website  . '</a>'; ?></b></p>
                     </div>
                     
-                    <p><a href="npo-list.php" class="btn btn-primary">Back</a>
+                    <p><a href="index.php" class="btn btn-primary">Back</a>
                     
                     
                 </div>
