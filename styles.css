@@ -55,9 +55,9 @@ main .card{
   margin: 20px;
   background-color:#6b6b6b;
   padding: 15px;
-  justify-content: space-around;
+  justify-content: space-evenly;
   vertical-align: center;
-  align-content: space-around;
+  align-content: space-evenly;
   
 
 }

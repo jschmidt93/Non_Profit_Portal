@@ -13,12 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $user_name = $_POST['email'];
     $password = $_POST['password'];
     $displayname = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
 
-    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
+    $hash_pass = password_hash($password, PASSWORD_DEFAULT);
+
+    if (!empty($user_name) && !empty($password) && !is_numeric($user_name) && !empty($last_name)) {
 
         $createAccountStatus = "Account Created Successfully";
 
-        $query = "insert into users (email, password, first_name, permissions) values ('$user_name', 'MD5($password)', '$displayname')";
+        $query = "insert into users (email, password, first_name, last_name) values ('$user_name', '$hash_pass', '$displayname', '$last_name')";
 
         mysqli_query($con, $query);
 
@@ -110,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input id="text" type="text" name="email" placeholder="Email"><br><br>
                 <input id="text" type="password" name="password" placeholder="Password"><br><br>
                 <input id="text" type="text" name="first_name" placeholder="First Name"><br><br>
+                <input id="text" type="text" name="last_name" placeholder="Last Name"><br><br>
 
                 <input id="button" type="submit" value="SIGN UP"><br><br>
 

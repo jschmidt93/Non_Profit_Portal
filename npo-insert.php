@@ -32,7 +32,7 @@ function process_upload_file () {
   return $image_file; //$elem;
 }
 
-$created_by = "";
+$created_by = $_POST['email'];
  $name = $_POST['name'];
  $type = $_POST['type'];
  $description = $_POST['description'];
@@ -44,8 +44,8 @@ $created_by = "";
  $website = $_POST['website'];
  $logo = process_upload_file();
 
- if(isset($_SESSION['user_id'])){
-  $created_by = $_SESSION['user_id'];
+ if(isset($_SESSION['email'])){
+  $created_by = $_SESSION['email'];
  }
  
 

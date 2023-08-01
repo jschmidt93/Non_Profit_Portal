@@ -102,11 +102,7 @@
 <input id="website" class="input" type="url" name="website" required/><br><br>
 
 <label for="logo">Upload Logo</label>
-<input id="logo" name="logo" class="input" type="file"/>
-
-<!-- <label for="logo_url">Logo URL</label>
-<input id="logo_url" class="input" type="url" name="logo_url" required/><br><br> -->
-
+<input id="logo" name="logo" class="input" type="file"/><br><br>
 
     <input onclick="return confirm('Are You Sure You Want To Add This Non-Profit Organization?');" type="submit" value="Submit" class="general-button"/>
 </form>

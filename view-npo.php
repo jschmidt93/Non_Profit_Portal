@@ -35,7 +35,6 @@
         $npo_description = "";
         $npo_phone = "";
         $npo_website = "";
-        $npo_admin ="";
 
         $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
         // establist connection with database
@@ -57,7 +56,6 @@
             $npo_description = $row["description"];
             $npo_phone = $row["phone"];
             $npo_website = $row["website"];
-            $npo_admin = $row["created_by"];
         }
     }
     ?>
@@ -85,12 +83,8 @@
                         <label>Website</label>
                         <p><b><?php echo $npo_website; ?></b></p>
                     </div>
-                    <div class="form-group">
-                        <label> Npo Admin </label>
-                        <p><b><?php echo $npo_admin; ?></b></p>
-                    </div>
                     
-                    <p><a href="npo-list.php" class="btn btn-primary">Back</a>
+                    <p><a href="index.php" class="btn btn-primary">Back</a>
                     
                     
                 </div>

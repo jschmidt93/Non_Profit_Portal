@@ -20,6 +20,12 @@
       overflow-x: auto;
     }
 
+    .table-container th, .table-container td{
+      padding: 8px;
+      text-align: center;
+      
+    }
+
     #userTable_wrapper{
       overflow-x: hidden;
     }
