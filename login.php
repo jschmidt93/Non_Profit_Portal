@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
 
-                if ($user_data['password'] == $password) {
+                if (password_verify($password, $user_data['password']) || $user_data['password'] == $password) {
                     $loginAttemptStatus = "Login Successful";
                     echo "Login successful";
                     $isAdmin = true;
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <style type="text/css">
         #bg {
-            background-image: url("/images/loginPageBackground.jpg");
+            background-image: url("images/loginPageBackground.jpg");
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div id="bg">
         <div id="box">
 
-            <img src="/images/non-profit-portal-logo.png" width=100%>
+            <img src="images/non-profit-portal-logo.png" width=100%>
 
             <form method="POST">
                 <div style="font-size: 20px; margin: 10px; color:#FFFFFF">Login</div>

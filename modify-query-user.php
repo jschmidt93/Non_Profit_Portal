@@ -8,6 +8,8 @@ $permission = $_POST['permissions'];
 $password = $_POST['password'];
 $email = $_POST['email'];
 
+$hash_pass = hash('sha512', $password);
+
 
  //create connection
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);

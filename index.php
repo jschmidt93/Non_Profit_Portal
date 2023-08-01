@@ -2,7 +2,7 @@
 <html lang="en" style="background-color: #1c1c1c">
 
 <head>
-<link rel="icon" href="/images/npo-favicon.png" type="image/x-icon">
+<link rel="icon" href="images/npo-favicon.png" type="image/x-icon">
   <link href="./styles.css" rel="stylesheet" type="text/css" media="all" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -20,6 +20,12 @@
       overflow-x: auto;
     }
 
+    .table-container th, .table-container td{
+      padding: 8px;
+      text-align: center;
+
+    }
+
     #npoTable_wrapper{
       overflow-x: hidden;
     }
@@ -74,16 +80,13 @@
           <th style="color: white;">email</th>
           <th style="color: white;">phone</th>
           <th style="color: white;">website</th>
-          <th style="color: white;">logo_url</th>
+          <th style="color: white;">logo</th>
           <th style="color: white;">creation_date</th>
           <th style="color: white;">last_updated</th>
-          <?php  
-            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
-              echo '<th style="color: white;">Npo_Admin</th>';}
-            ?>
+          <?php if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super'){
+          echo '<th style="color: white;">manager</th>';}
+          ?>
           <th style="color: white;">actions</th>
-        
-          
         </tr>
       </thead>
       <tbody>
@@ -116,8 +119,6 @@
                       <td>';
                       ;
                   }
-                  
-                  
         
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
               echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
@@ -127,9 +128,8 @@
                     <form action="modify-npo.php?id=' . $row["id"] . '" method="POST">
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
-                    </form>';
-                
-                  
+                    </form>
+                    ';
             }
         
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
