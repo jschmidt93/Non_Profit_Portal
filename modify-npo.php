@@ -155,23 +155,28 @@ if (isset($_GET["id"])) {
     <input id="logo" name="logo" class="input" type="file"/><br><br>
 
     <label for="npo_admin">Organization Manager</label>
+<?php if (isset($_SESSION['permissions']) && $_SESSION['permissions'] === 'super') { ?>
     <select id="npo_admin" class="input" name="npo_admin" required>
-    <?php
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+        <?php
+        $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-    $sql = "SELECT email FROM users";
-    $result = $conn->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $email = $row["email"];
-        $selected = ($email === $npo_admin) ? "selected" : "";
-        echo "<option value=\"$email\" $selected>$email</option>";
-    }
-    $conn->close();
-    ?>
-</select><br><br>
+        $sql = "SELECT email FROM users";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $email = $row["email"];
+            $selected = ($email === $npo_admin) ? "selected" : "";
+            echo "<option value=\"$email\" $selected>$email</option>";
+        }
+        $conn->close();
+        ?>
+    </select>
+<?php } else {
+    // Display a non-editable field showing the current organization manager for non-super users
+    echo "<input type=\"text\" class=\"input\" value=\"$npo_admin\" readonly>";
+} ?><br><br>
 
     <input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
 </form>
