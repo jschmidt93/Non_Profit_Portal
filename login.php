@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $_SESSION['user_id'] = $user_data['user_id'];
                     $_SESSION['permissions'] = $user_data['permissions'];
                     $_SESSION['first_name'] = $user_data['first_name']; 
+                    $_SESSION['email'] = $user_data['email'];
 
                     header("Location: index.php");
                     die;

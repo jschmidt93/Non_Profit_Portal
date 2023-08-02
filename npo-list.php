@@ -49,7 +49,8 @@
   include_once "header.php";
   require_once "connection.php";
 
-  $loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+  $loggedInUserEmail = isset($_SESSION['email']) ? $_SESSION['email'] : null;
   ?>
 
   <h1 style="text-align: center;">List of Non-Profit Organizations</h1>
@@ -132,7 +133,7 @@
                     ';
             }
         
-            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
+            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserEmail == $row['created_by']) {
               echo '<form action=\'delete-query.php\' method=\'POST\' onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>

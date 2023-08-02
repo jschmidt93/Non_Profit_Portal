@@ -32,7 +32,7 @@ function process_upload_file () {
   return $image_file; //$elem;
 }
 
-$created_by = $_POST['email'];
+$created_by = "";
  $name = $_POST['name'];
  $type = $_POST['type'];
  $description = $_POST['description'];
