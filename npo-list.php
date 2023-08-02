@@ -20,12 +20,6 @@
       overflow-x: auto;
     }
 
-    .table-container th, .table-container td{
-      padding: 8px;
-      text-align: center;
-
-    }
-
     #npoTable_wrapper{
       overflow-x: hidden;
     }
@@ -49,8 +43,7 @@
   include_once "header.php";
   require_once "connection.php";
 
-
-  $loggedInUserEmail = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+  $loggedInUserID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
   ?>
 
   <h1 style="text-align: center;">List of Non-Profit Organizations</h1>
@@ -81,12 +74,9 @@
           <th style="color: white;">email</th>
           <th style="color: white;">phone</th>
           <th style="color: white;">website</th>
-          <th style="color: white;">logo</th>
+          <th style="color: white;">logo_url</th>
           <th style="color: white;">creation_date</th>
           <th style="color: white;">last_updated</th>
-          <?php if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super'){
-          echo '<th style="color: white;">manager</th>';}
-          ?>
           <th style="color: white;">actions</th>
         </tr>
       </thead>
@@ -108,18 +98,13 @@
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["city"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["state"] . '</div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["country"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["email"] . '</div></td>
+                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';"><a href="mailto:' . $row["email"] . '">' . $row["email"] . '</a></div></td>
                     <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["phone"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["website"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["logo"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["creation_date"] . '</div></td>
-                    <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["last_updated"] . '</div></td>
+                    // <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';"><a href="' . $row["website"] . '">' . $row["website"] . '</a></div></td>
+                    // <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["logo"] . '</div></td>
+                    // <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["creation_date"] . '</div></td>
+                    // <td><div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["last_updated"] . '</div></td>
                     <td>';
-                    if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
-                      echo '<div onclick="window.location.href=\'view-npo.php?id='.$row["id"].'\';">' . $row["created_by"] . '</div></td>
-                      <td>';
-                      ;
-                  }
         
             if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'super') {
               echo '<form action="delete-query.php" method="POST" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
@@ -129,11 +114,10 @@
                     <form action="modify-npo.php?id=' . $row["id"] . '" method="POST">
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'update\' value=\'Modify\'/>
-                    </form>
-                    ';
+                    </form>';
             }
         
-            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserEmail == $row['created_by']) {
+            if (isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin' && $loggedInUserID == $row['created_by']) {
               echo '<form action=\'delete-query.php\' method=\'POST\' onsubmit="return confirm(\'Are you sure you want to delete this item?\');">
                       <input type=\'hidden\' name=\'id\' value=\'' . $row["id"] . '\'>
                       <input type=\'submit\' id=\'admin_buttons\' name=\'delete\' value=\'Delete\'/>
