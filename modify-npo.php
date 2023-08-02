@@ -154,7 +154,10 @@ if (isset($_GET["id"])) {
     <label for="logo_url">Upload Logo</label>
     <input id="logo" name="logo" class="input" type="file"/><br><br>
 
-    <label for="npo_admin">Organization Manager</label>
+    <input type="hidden" name="npo_admin" value="<?php echo $npo_admin; ?>">
+
+
+<label for="npo_admin">Organization Manager</label>
 <?php if (isset($_SESSION['permissions']) && $_SESSION['permissions'] === 'super') { ?>
     <select id="npo_admin" class="input" name="npo_admin" required>
         <?php
@@ -174,18 +177,19 @@ if (isset($_GET["id"])) {
         ?>
     </select>
 <?php } else {
-    // Display a non-editable field showing the current organization manager for non-super users
-    echo "<input type=\"text\" class=\"input\" value=\"$npo_admin\" readonly>";
-} ?><br><br>
+  
+    ?>
+    <input type="text" class="input" value="<?php echo $npo_admin; ?>" readonly>
+<?php } ?><br><br>
 
-    <input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
+<input type="submit" value="Update" class="general-button" onclick="return confirm('Are you sure you want to make these changes?');">
 </form>
     </div>
 </div>
 <script>
-    // JavaScript function to handle the form submission
+    
     function handleFormSubmission() {
-      // Show the confirmation message
+      
       alert('Entry updated successfully!');
     }
   </script>
