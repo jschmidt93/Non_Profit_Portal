@@ -58,7 +58,7 @@ $created_by = "";
  }else{
 
   $stmt = $conn->prepare("INSERT INTO organization(name, type, description, address, city, state, email, phone, website, logo, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-$stmt->bind_param("sssssssssis", $name, $type, $description, $address, $city, $state, $email, $phone, $website, $logo, $created_by);
+$stmt->bind_param("sssssssssss", $name, $type, $description, $address, $city, $state, $email, $phone, $website, $logo, $created_by);
 $stmt->execute();
 
     echo "New resource added successfully";
